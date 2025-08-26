@@ -33,8 +33,4 @@ Thumbs.db
 
 # Optional: coverage reports
 coverage/
-
-
-node_modules/
-dist/
-.env
+.gitignore
