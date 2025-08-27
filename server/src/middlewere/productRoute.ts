@@ -16,6 +16,7 @@ export const productRoute = async (req:AuthRequest, res:Response, next:NextFunct
     if (!decode) {
       return res.status(400).json({ message: "Token unAutharized" });
     }
+    console.log(decode)
     const user = await User.findOne({
       where: { id: decode.id},
       attributes: { exclude: ["password"] },
