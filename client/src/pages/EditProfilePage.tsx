@@ -4,7 +4,7 @@ import { MdOutlinePhotoCamera } from "react-icons/md";
 import { useState } from "react";
 import profileImg from "../../public/avatar.png";
 import { useDispatch, useSelector } from "react-redux";
-import { authUser, selectUser } from "../authSlice/auth.slice";
+import { authUser , selectUser } from "../authSlice/auth.slice";
 import SideBar from "../components/SideBar";
 
 const EditProfilePage = () => {

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "../lib/axiosInstance";
 
@@ -38,7 +38,7 @@ export const logout: any = createAsyncThunk("logout", async () => {
 
 export const suggestUser: any = createAsyncThunk("/suggesteduser", async () => {
   try {
-    const res = await axiosInstance.get("/user/suggesteduser");
+    const res = await axiosInstance.get("/auth/suggesteduser");
     return res.data;
   } catch (error) {
     console.log(`Error in suggestedUserSlice ${error}`);
@@ -58,8 +58,9 @@ export const authSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
-    authUser: (state, action) => {
-      state.user = action.payload;
+    authuser: (state: any,action) => {
+      const user = action.payload
+      state.user = user || null
     },
   },
   extraReducers: (builder) => {
@@ -90,11 +91,7 @@ export const authSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state: any) => {
         state.user = null;
-      })
-      .addCase(getUser.fulfilled, (state, action) => {
-       state.status = "succeded"
-        state.user = action.payload;
-      });
+            });
   },
 });
 
@@ -102,5 +99,9 @@ export const authError = (state: any) => state.auth.error;
 export const authStatus = (state: any) => state.auth.status;
 export const suggestedUser = (state: any) => state.auth.suggestUser;
 export const selectUser = (state: any) => state.auth.user;
+export const authUser:any = createSelector(
+  [selectUser],
+  (user) => ({ user })
+);
 
 export default authSlice.reducer;
