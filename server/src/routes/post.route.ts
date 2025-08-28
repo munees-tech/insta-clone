@@ -6,7 +6,7 @@ import {
   getPost,
   likeUnlikePost,
 } from "../controller/post.controller";
-import { productRoute } from "../middlewere/productRoute";
+import { productRoute } from "../middleware/productRoute";
 
 const router = express.Router();
 

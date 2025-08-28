@@ -1,6 +1,6 @@
 import express from "express";
 import multer from "multer";
-import { productRoute } from "../middlewere/productRoute";
+import { productRoute } from "../middleware/productRoute";
 import {
   follow,
   getUser,

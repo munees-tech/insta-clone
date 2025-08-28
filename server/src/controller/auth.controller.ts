@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import User from "../models/user.model";
 import { Request, Response } from "express";
-import gendrateToken from "../utils/gendrateToken";
+import generateToken from "../utils/generateToken";
 
 interface Iuser {
   id: number;
@@ -34,7 +34,7 @@ export const signup = async (req: Request, res: Response) => {
       password: hassedPassword,
     })) as unknown as Iuser;
 
-    await gendrateToken(newUser.id, res);
+    await generateToken(newUser.id, res);
     return res.status(200).json({
       message: "user created succesfully",
       user: { id: newUser.id, userName, email },
@@ -59,7 +59,7 @@ export const login = async (req: AuthRequest, res: Response) => {
     if (!isPasswordCorrect) {
       return res.status(400).json({ message: "Password doesn't matched" });
     }
-    await gendrateToken(user?.id, res);
+    await generateToken(user?.id, res);
 
     res.status(200).json({
       id: user?.id,
